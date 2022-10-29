@@ -123,8 +123,8 @@ class Coin(pygame.sprite.Sprite):
             for plyrTx in range(topL[0],topR[0]):
                 if (plyrTx in coinX):
                     return True
-        return False #98
-    def changeLocation(self,coinCoords):
+        return False
+    def changeLocation(self,coinCoords): #99th Line
         allCoords = [(535,90), (65,285), (201,422), (90,145), (506,477), (229,7), (478,340)]
         newCoords = coinCoords
         while (coinCoords == newCoords):
@@ -133,4 +133,4 @@ class Coin(pygame.sprite.Sprite):
         self.rect.y = newCoords[1]
 
 
-#99 Lines of Code When Not Considering Comments
+#105 Lines of Code When Not Considering Comments

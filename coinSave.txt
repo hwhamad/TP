@@ -1,1 +1,1 @@
-coins:0;tutorial:False;level1:False;level2:False;level3:False;level4:False;level5:False
+coins:0;level1:False;level2:False;level3:False;level4:False;level5:False;

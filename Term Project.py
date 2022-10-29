@@ -104,7 +104,7 @@ class GameOpen:
         lvl3Btn = Button("Level 3",(50,300),(150,400),self.openLvl3)
         lvl4Btn = Button("Level 4",(200,300),(300,400),self.openLvl4)
         lvl5Btn = Button("Level 5",(350,300),(450,400),self.openLvl5)
-        while (self.levelsrunning):
+        while (self.levelsrunning): #98th Line
             mouseXY = pygame.mouse.get_pos()
             for ev in pygame.event.get():
                 if (ev.type == pygame.QUIT):
@@ -204,7 +204,7 @@ class GameOpen:
             self.screen.blit(lvl5Btn.txtSurf,(coords5[0]+24,coords5[1]+35))
             
             pygame.display.update()
-    def endsWindow(self):
+    def endsWindow(self): #179th Line
         pygame.quit()
         level = openLevel(["levelEndless.png","levelEndless_1.png"],"charImageSmall.png",8,480,60,False)
         level.createWindow()
@@ -222,40 +222,21 @@ class GameOpen:
         level2.createWindow()
     def openLvl3(self):
         pygame.quit()
-        # level0 = 
-        # level0.createWindow()
-    def openLvl4(self):
+        level3 = openLevel(["level3.png","level3_1.png"],"charImageMed.png",10,210,30)
+        level3.createWindow()
+    def openLvl4(self): #199th Line
         pygame.quit()
-        # level0 = 
-        # level0.createWindow()
+        level4 = openLevel(["level4.png","level4_1.png"],"charImageSmall.png",43,40,50)
+        level4.createWindow()
     def openLvl5(self):
         pygame.quit()
-        # level0 = 
-        # level0.createWindow()
+        level5 = openLevel(["level5.png","level5_1.png"],"charImageSmall.png",9,253,65)
+        level5.createWindow()
     
-
-
-
-
 game = GameOpen()
 game.openTitle()
 
+#208 Lines of Code When Not Considering Comments or WhiteSpace
 
 
-
-
-
-
-
-#doop = openLevel(["level0.png","level0_1.png"],"charImage.png",120,400,0,False)
-#doop1 = openLevel(["level1.png","level1_1.png"],"charImage.png",75,400,30)
-#doop2 = openLevel(["level2.png","level2_1.png"],"charImage.png",30,190,30)
-
-#doopE = openLevel(["levelEndless.png","levelEndless_1.png"],"charImageSmall.png",8,480,60,False)
-#doopE.createWindow()
-
-#352 Lines in Total (Not Counting These)
-
-
-
-
+#570 Lines in Total (Not Counting These)

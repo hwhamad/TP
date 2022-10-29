@@ -25,7 +25,7 @@ class openLevel:
         self.vSpeed = 0
         self.charImage = charImage
         self.spd = 2
-        if (self.charImage == "charImageSmall.png"):
+        if (self.charImage == "charImageSmall.png" or self.charImage == "charImageMed.png"):
             self.spd = 1
         #Get the timer for each level
         self.time = time
@@ -53,7 +53,7 @@ class openLevel:
                     res = LevelResult.Result(True,self.maze.width,self.maze.height)
                     res.openResult()
     #Don't Let the Character Touch Walls to Their Right
-    def avoidRightWalls(self): #45 lines
+    def avoidRightWalls(self): #45th line
         newx = self.xco + self.hSpeed + self.charWidth
         newY = range(self.yco, self.yco + self.charHeight)
         stop = False
@@ -235,10 +235,3 @@ class openLevel:
             
 
 #195 Lines of Code When Not Considering Comments or Print Statements
-
-# #doop = openLevel(["level0.png","level0_1.png"],"charImage.png",120,400,0,False)
-# #doop1 = openLevel(["level1.png","level1_1.png"],"charImage.png",75,400,30)
-# #doop2 = openLevel(["level2.png","level2_1.png"],"charImage.png",30,190,30)
-
-# doopE = openLevel(["levelEndless.png","levelEndless_1.png"],"charImageSmall.png",8,480,60,False)
-# doopE.createWindow()
