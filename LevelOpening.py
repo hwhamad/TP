@@ -35,6 +35,7 @@ class openLevel:
         if (self.image == "levelEndless.png"):
             self.endLevel = True
             self.enmTime = 1000
+            self.coins = 0
         #Create a Group for all Sprites
         self.allSprites = pygame.sprite.Group()
     #Don't Let the Character Touch Walls to Their Left
@@ -52,7 +53,7 @@ class openLevel:
                     res = LevelResult.Result(True,self.maze.width,self.maze.height)
                     res.openResult()
     #Don't Let the Character Touch Walls to Their Right
-    def avoidRightWalls(self):
+    def avoidRightWalls(self): #45 lines
         newx = self.xco + self.hSpeed + self.charWidth
         newY = range(self.yco, self.yco + self.charHeight)
         stop = False
@@ -79,8 +80,6 @@ class openLevel:
                 if (self.screen.get_at((newx,newy))[:3] == (34,177,76)):
                     res = LevelResult.Result(True,self.maze.width,self.maze.height)
                     res.openResult()
-            #else:
-                #self.coin.checkPlayer(parameters)
     #Don't Let the Character Touch Walls Below Them
     def avoidDownWalls(self):
         newy = self.yco + self.vSpeed + self.charHeight
@@ -112,8 +111,18 @@ class openLevel:
         if (enemyreached):
             res = LevelResult.Result(False,self.maze.width,self.maze.height)
             res.openResult()
+    def checkCoin(self): #100th Line
+        coinco = (self.coin.rect.x,self.coin.rect.y)
+        playerWH = (self.char.rect.width,self.char.rect.height)
+        coinreached = self.coin.checkPlayer(coinco,(self.xco,self.yco),playerWH)
+        if (coinreached):
+            self.coin.changeLocation(coinco)
+            self.coins += 1
+            Data().save(self.coins)
+            self.enmTime //= 2
+            pygame.time.set_timer(pygame.USEREVENT,self.enmTime)
     #Create A New Window and Put All Sprites on the Screen
-    def createWindow(self): #88
+    def createWindow(self):
         #Display the Screen and Find the Character's Attributes
         self.screen = pygame.display.set_mode((self.maze.width , self.maze.height))
         self.screen.blit(pygame.image.load(self.image), (0,0))
@@ -180,24 +189,28 @@ class openLevel:
                 #Check if They Touched the Enemy
                 if (self.endLevel):
                     self.checkEnemy()
+                    self.checkCoin()
             if (keys[ord("d")]):
                 self.hSpeed = self.spd
                 self.avoidRightWalls()
                 #Check if They Touched the Enemy
                 if (self.endLevel):
                     self.checkEnemy()
+                    self.checkCoin()
             if (keys[ord("w")]):
                 self.vSpeed = self.spd * -1
                 self.avoidUpWalls()
                 #Check if They Touched the Enemy
                 if (self.endLevel):
                     self.checkEnemy()
+                    self.checkCoin()
             if (keys[ord("s")]):
                 self.vSpeed = self.spd
                 self.avoidDownWalls()
                 #Check if They Touched the Enemy
                 if (self.endLevel):
                     self.checkEnemy()
+                    self.checkCoin()
             #Exit the Program, if it's No Longer Running
             if (self.running):
                 #Adjust the View Depending on the View State
@@ -221,11 +234,11 @@ class openLevel:
             pygame.display.update()
             
 
-#160 Lines of Code When Not Considering Comments or Print Statements
+#195 Lines of Code When Not Considering Comments or Print Statements
 
-#doop = openLevel(["level0.png","level0_1.png"],"charImage.png",120,400,0,False)
-#doop1 = openLevel(["level1.png","level1_1.png"],"charImage.png",75,400,30)
-#doop2 = openLevel(["level2.png","level2_1.png"],"charImage.png",30,190,30)
+# #doop = openLevel(["level0.png","level0_1.png"],"charImage.png",120,400,0,False)
+# #doop1 = openLevel(["level1.png","level1_1.png"],"charImage.png",75,400,30)
+# #doop2 = openLevel(["level2.png","level2_1.png"],"charImage.png",30,190,30)
 
-doopE = openLevel(["levelEndless.png","levelEndless_1.png"],"charImageSmall.png",8,480,60,False)
-doopE.createWindow()
+# doopE = openLevel(["levelEndless.png","levelEndless_1.png"],"charImageSmall.png",8,480,60,False)
+# doopE.createWindow()

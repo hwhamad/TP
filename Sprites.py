@@ -1,4 +1,5 @@
 import pygame
+import random
 
 #Create A Sprite That's For the Character
 class Char(pygame.sprite.Sprite):
@@ -92,10 +93,44 @@ class Coin(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.image.load(img).convert_alpha()
         self.rect = self.image.get_rect()
-    def checkPlayer(self):
-        pass
-    def changeLocation(self):
-        pass
+    def checkPlayer(self,coinCoords,playerCoords,playerWH):
+        #Get the Player's Dimensions
+        topL = playerCoords
+        topR = (topL[0] + playerWH[0], topL[1])
+        botL = (topL[0], topL[1] + playerWH[1])
+        botR = (topR[0], botL[1])
+        #Get Dimensions of Coin
+        coinRCoords = (coinCoords[0]+self.rect.width,coinCoords[1]+self.rect.height)
+        coinX = range(coinCoords[0],coinRCoords[0])
+        coinY = range(coinCoords[1],coinRCoords[1])
+        #Check Left Side of Coin
+        if (topR[0] + 1 == coinCoords[0] or topR[0] == coinCoords[0]):
+            for plyrRy in range(topR[1],botR[1]):
+                if (plyrRy in coinY):
+                    return True
+        #Check Top Side of Coin
+        if (botR[1] + 1 == coinCoords[1] or botR[1] == coinCoords[1]):
+            for plyrBx in range(botL[0],botR[0]):
+                if (plyrBx in coinX):
+                    return True
+        #Check Right Side of Coin
+        if (botL[0] - 1 == coinRCoords[0] or botL[0] == coinRCoords[0]):
+            for plyrLy in range(topL[1],botL[1]):
+                if (plyrLy in coinY):
+                    return True
+        #Check Bottom Side of Coin
+        if (topL[1] - 1 == coinRCoords[1] or topL[1] == coinRCoords[1]):
+            for plyrTx in range(topL[0],topR[0]):
+                if (plyrTx in coinX):
+                    return True
+        return False #98
+    def changeLocation(self,coinCoords):
+        allCoords = [(535,90), (65,285), (201,422), (90,145), (506,477), (229,7), (478,340)]
+        newCoords = coinCoords
+        while (coinCoords == newCoords):
+            newCoords = random.choice(allCoords)
+        self.rect.x = newCoords[0]
+        self.rect.y = newCoords[1]
 
 
-#50 Lines of Code When Not Considering Comments
+#99 Lines of Code When Not Considering Comments
